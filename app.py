@@ -16,7 +16,8 @@ from sklearn.tree import DecisionTreeRegressor
 from sklearn.model_selection import train_test_split
 import pickle
 from ucimlrepo import fetch_ucirepo 
-
+import streamlit.components.v1 as components
+import pygwalker as pyg
 folder_path='./Models'
 
 #Change Page Name & Icon
@@ -76,7 +77,7 @@ def main():
 	st.title("Welcome to ML Project WebApp")
 
 	st.sidebar.title("ML WebApp")
-	menu = ["About","EDA",'Model_Training',"Predictor","Project Demo Video"]
+	menu = ["About","EDA",'Model_Training',"Predictor","Project Demo Video","Tableau Visualization"]
 	choice = st.sidebar.selectbox("Choose the following options",menu)
 	data = get_data()
 
@@ -224,8 +225,12 @@ def main():
 		st.subheader("ML Project Demo Video")
 		st.video("https://drive.google.com/file/d/1rs3o2N68b32rUxkx90xpXb_0SgxXkuKC/view?usp=sharing")
 		st.markdown("[Project Demo Video](https://drive.google.com/file/d/1rs3o2N68b32rUxkx90xpXb_0SgxXkuKC/view?usp=sharing)")
-
-
+	elif choice== "Tableau Visualization":
+		# Add Title
+		st.title("Tableau Visualization")
+		df =get_data()
+		pyg_html = pyg.to_html(df)
+		components.html(pyg_html, height=700, scrolling=True)
 
 if __name__ == '__main__':
 	main()
