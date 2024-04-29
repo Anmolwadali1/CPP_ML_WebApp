@@ -19,7 +19,7 @@ Incorporate Tableau for advanced data visualization within the web application. 
 ### Usage:
 Clone the repository to your local machine.
 
-Install the necessary dependencies by running pip install -r requirements.txt.
+Install the necessary dependencies by running **pip install -r requirements.txt**.
 
 Launch the Streamlit web application using **streamlit run app.py**.
 
