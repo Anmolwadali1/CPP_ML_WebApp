@@ -74,7 +74,7 @@ def get_data():
 
 def main():
 
-	st.title("Welcome to ML Project WebApp")
+	st.title("Welcome to CCPP Energy WebApp")
 
 	st.sidebar.title("ML WebApp")
 	menu = ["About","EDA",'Model_Training',"Predictor","Project Demo Video","Tableau Visualization"]
