@@ -21,7 +21,7 @@ import pygwalker as pyg
 folder_path='./Models'
 
 #Change Page Name & Icon
-st.set_page_config(page_title='ML Project',page_icon=':smiley:')
+st.set_page_config(page_title='CCPP',page_icon=':smiley:')
 
 
 Choose_Model = {"LinearRegression":LinearRegression(),
