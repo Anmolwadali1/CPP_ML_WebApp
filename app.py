@@ -51,7 +51,7 @@ def train_model(data,model,test_size=0.2,):
 
 	if not os.path.exists(folder_path):
 		os.makedirs(folder_path)
-	pickle.dump(model, open(f'{folder_path}/model_{model}.pkl','wb'))
+	pickle.dump(model, open(f'{folder_path}/model_{model}_{test_size*100}.pkl','wb'))
 	return (round(model.score(X_train, y_train),2),round(model.score(X_test, y_test),2))
 
 def predict_output(inputs,filename):
@@ -173,13 +173,36 @@ def main():
 		Model = st.selectbox("Choose Model for Training",Choose_Model.keys())
 		Test_size = st.number_input("Choose Test size in %",10,100,)
 
-				
-
 		if st.button("Model train"):
 			with st.spinner("Training Model...."):
 				train_score,test_score = train_model(data,Choose_Model[Model],Test_size/100)
 				time.sleep(3)
 				st.success(f"Model Trained.\n \n R2 Train score: {train_score} \n \n R2 Test score: {test_score}")
+
+		st.subheader("Download a Trained Model")
+		if os.path.exists(folder_path):
+			pickle_files = [f for f in os.listdir(folder_path) if f.endswith('.pkl')]
+
+			if pickle_files:
+				selected_file = st.selectbox("Select a model to download", pickle_files)
+
+				file_path = os.path.join(folder_path, selected_file)
+				with open(file_path, 'rb') as f:
+					model_bytes = f.read()
+
+				st.download_button(
+					label=f"Download {selected_file}",
+					data=model_bytes,
+					file_name=selected_file,
+					mime='application/octet-stream'
+				)
+			else:
+				st.info("No pickle files found in the Models folder.")
+		else:
+			st.error("Models folder not found.")
+
+
+				
 
 	elif choice =='Predictor':
 		st.subheader(f"Prediction of Net hourly Electrical energy for Combined Cycle Power Plant")
